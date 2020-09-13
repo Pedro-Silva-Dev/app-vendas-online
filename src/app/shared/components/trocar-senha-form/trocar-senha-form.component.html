@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Alterar Senha</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="fechar()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="alterarSenhaForm" (submit)="alterarSenha()">
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="senhaAtual">Senha Atual<span class="text-danger">*</span></label>
+      <input formControlName="senhaAtual" type="password" id="senhaAtual" placeholder="Digite a sua senha atual" [ngClass]="{'form-control': true, 'is-invalid': validarCampo('senhaAtual'), 'is-valid': campoCorreto('senhaAtual')}">
+      <small *ngIf="alterarSenhaForm.get('senhaAtual').hasError('senhaIncorreta')" class="text-danger">A senha está incorreta.</small>
+    </div>
+    <div class="form-group">
+      <label for="senha">Senha<span class="text-danger">*</span></label>
+      <input formControlName="senha" type="password" id="senha" placeholder="Digite a sua nova senha" [ngClass]="{'form-control': true, 'is-invalid': (validarCampo('senha') || !validarCampoSenha()), 'is-valid': (campoCorreto('senha') && validarCampoSenha())}">
+      <small *ngIf="!validarCampoSenha()" class="text-danger">As senhas devem ser iguais.<br></small>
+      <small *ngIf="alterarSenhaForm.get('senha').hasError('minlength') && alterarSenhaForm.get('senha').touched" class="text-danger">A senha deve conter mais de 5 characters.</small>
+    </div>
+    <div class="form-group">
+      <label for="reSenha">Repetir Senha<span class="text-danger">*</span></label>
+      <input formControlName="reSenha" type="password" id="reSenha" placeholder="Repita a sua nova senha" [ngClass]="{'form-control': true, 'is-invalid': (validarCampo('reSenha') || !validarCampoSenha()), 'is-valid': (campoCorreto('reSenha') && validarCampoSenha())}">
+      <small *ngIf="!validarCampoSenha()" class="text-danger">As senhas devem ser iguais.<br></small>
+      <small *ngIf="alterarSenhaForm.get('reSenha').hasError('minlength') && alterarSenhaForm.get('reSenha').touched" class="text-danger">A senha deve conter mais de 5 characters.</small>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="fechar()" class="btn btn-outline-secondary" id="voltar" type="button">Voltar</button>
+    <button [disabled]="alterarSenhaForm.invalid" class="btn btn-primary" id="cadastrar" type="submit"><span *ngIf="!processando; else spinner">Alterar Senha</span></button>
+  </div>
+
+</form>
+
+
+<ng-template #spinner>
+  <app-spinner></app-spinner>
+</ng-template>

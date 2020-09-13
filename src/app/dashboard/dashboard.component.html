@@ -1,0 +1,81 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+        <h3 class="title mt-4 mb-4">Dashboard</h3>
+    </div>
+  </div>
+  <hr class="mt-0">
+  <div class="row">
+    <div *ngFor="let aderencia of aderencias" class="col-lg-4">
+      <div [ngClass]="{'ui-card': true, 'ui-card-left-green': isAderenciaPositiva(aderencia), 'ui-card-left-red': !isAderenciaPositiva(aderencia)}">
+        <div class="row">
+          <div class="col-lg-6 d-flex justify-content-center align-items-center">
+            <h3 class="title-aderencia">{{aderencia.mes}}</h3>
+          </div>
+          <div class="col-lg-6 ui-divider-left mt-2 mb-2">
+            <h3 [ngClass]="{'text-danger': !isAderenciaPositiva(aderencia), 'text-success': isAderenciaPositiva(aderencia), 'aderencia-title': true, 'd-flex': true, 'justify-content-center': true}">{{aderencia?.percentual?.toFixed(1).toString().replace('.', ',')}}%</h3>
+            <p class="mb-0 d-flex justify-content-center">Meta: {{aderencia.meta?.toFixed(1).toString().replace('.', ',')}}%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 mt-4">
+      <div class="ui-card p-4">
+        <div class="ui-card-header pb-4">
+          <h4 class="sub-title">Historico Anual</h4>
+        </div>
+        <div class="card-body">
+          <highcharts-chart *ngIf="chartHistoricoAnoOptions; else nenhumaInformacao"
+          [Highcharts]="Highcharts"
+          [options]="chartHistoricoAnoOptions"
+
+          style="width: 100%; height: 400px; display: block;"
+        ></highcharts-chart>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 mt-4">
+      <div class="ui-card p-4">
+        <div class="ui-card-header d-flex justify-content-between">
+          <h4 class="sub-title">Historico de Vendas Mensal</h4>
+          <select *ngIf="historicosMensais?.length" (change)="trocarMesHistorico($event.target.value)" name="mes" id="mes" class="form-control col-lg-2">
+            <option *ngFor="let mes of mesesHistoricoMensal" [value]="mes">{{mes}}</option>
+          </select>
+        </div>
+        <div class="card-body">
+          <highcharts-chart *ngIf="chartHistoricoMensalOptions; else nenhumaInformacao"
+          [Highcharts]="Highcharts"
+          [options]="chartHistoricoMensalOptions"
+
+          style="width: 100%; height: 400px; display: block;"
+        ></highcharts-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ui-card p-4 mt-4 mb-4">
+        <div class="ui-card-header d-flex justify-content-between">
+          <h4 class="sub-title">Total de Vendas</h4>
+        </div>
+        <div class="card-body">
+          <highcharts-chart *ngIf="chartHistoricoVendasOptions; else nenhumaInformacao"
+          [Highcharts]="Highcharts"
+          [options]="chartHistoricoVendasOptions"
+
+          style="width: 100%; height: 400px; display: block;"
+        ></highcharts-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #nenhumaInformacao>
+  <div class="alert alert-info" role="alert">
+    Nenhuma informação disponível.
+  </div>
+</ng-template>

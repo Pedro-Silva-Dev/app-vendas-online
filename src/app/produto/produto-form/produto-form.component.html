@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{produto?.id ? 'Atualizar' : 'Cadastrar'}} Produto</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="fechar()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="produtoForm" (submit)="salvar()">
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="nome">Nome<span class="text-danger">*</span></label>
+      <input formControlName="nome" type="text" id="nome" placeholder="Nome do produto" [ngClass]="{'form-control': true, 'is-invalid': validarCampo('nome')}">
+    </div>
+    <div class="form-group">
+      <label for="valor">Valor<span class="text-danger">*</span></label>
+      <input currencyMask formControlName="valor" placeholder="R$99.99"  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" type="text" id="valor" [ngClass]="{'form-control': true, 'is-invalid': validarCampo('valor')}">
+    </div>
+    <div class="form-group">
+      <label for="categoria">Categoria<span class="text-danger">*</span></label>
+      <select formControlName="categoriaId" id="categoria" [ngClass]="{'form-control': true, 'is-invalid': validarCampo('categoriaId')}">
+        <option value="null">Selecione uma categoria</option>
+        <option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.nome}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="fechar()" class="btn btn-outline-secondary" id="voltar" type="button">Voltar</button>
+    <button [disabled]="produtoForm.invalid" class="btn btn-primary" id="cadastrar" type="submit"><span *ngIf="!processando; else spinner">{{produto?.id ? 'Atualizar' : 'Cadastrar'}}</span></button>
+  </div>
+
+</form>
+
+
+<ng-template #spinner>
+  <app-spinner></app-spinner>
+</ng-template>

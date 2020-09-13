@@ -1,0 +1,77 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 d-flex justify-content-between mt-4">
+      <h3 class="title d-flex align-items-center">Produtos</h3>
+      <button (click)="exibirProdutoForm(produtoForm)" class="btn btn-outline-primary" type="button">+ Novo Produto</button>
+    </div>
+  </div>
+  <hr>
+  <form [formGroup]="filtroForm" class="form-inline mb-4" (submit)="filtrar()">
+    <input formControlName="nome" type="text" placeholder="Nome do produto" id="nome" class="form-control mr-2">
+    <input currencyMask formControlName="valorMin" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" placeholder="Valor minimo" class="form-control mr-2" type="text" id="valorMin">
+    <input currencyMask formControlName="valorMax" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" placeholder="Valor maximo" class="form-control mr-2" type="text" id="valorMax">
+    <select formControlName="categoria" id="categoria" class="form-control mr-2">
+      <option value="null">Selecione uma categoria</option>
+      <option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.nome}}</option>
+    </select>
+    <button class="btn btn-outline-primary mr-2" id="filtrar" type="submit">Filtrar</button>
+    <button *ngIf="exibirLimparFiltro()" (click)="limparFiltros()" class="btn btn-outline-primary" id="limpar" type="button">Limpar</button>
+  </form>
+
+  <div class="row">
+    <div *ngFor="let produto of produtos" class="col-lg-2">
+      <div class="ui-card">
+        <div class="ui-card-header">
+          <span>{{produto['categoria']?.nome}}</span>
+          <img src="./assets/images/produto.png" class="img-fluid" alt="produto">
+        </div>
+        <div class="ui-card-body d-flex justify-content-between">
+          <div>
+            <h4 class="sub-title">{{produto.nome}}</h4>
+            <h5 class="sub-title">R$ {{produto.valor.toString().replace('.',',')}}</h5>
+          </div>
+          <div class="pl-1 cursor-pointer">
+            <div class="btn-group" dropdown>
+              <span class="material-icons" dropdownToggle>more_vert</span>
+              <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+                <li (click)="exibirProdutoForm(produtoForm, produto)" role="menuitem"><a class="dropdown-item" href="javascript:void(0)">Editar</a></li>
+                <li [swal]="deleteSwal" (confirm)="excluir(produto.id)" role="menuitem"><a class="dropdown-item" href="javascript:void(0)">Excluir</a></li>
+              </ul>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!produtos?.length" class="row">
+    <div class="col-lg-12">
+      <div class="alert alert-info" role="alert">
+        Nenhuma informação encontrada.
+      </div>
+    </div>
+  </div>
+  <div *ngIf="(totalItems > tamanho)" class="row">
+    <div class="col-xs-12 col-12 mt-3">
+      <pagination [totalItems]="totalItems" nextText="Avançar" previousText="Voltar" [itemsPerPage]="tamanho" (pageChanged)="obterPaginaProduto($event.page)" [(ngModel)]="pagina"></pagination>
+    </div>
+  </div>
+</div>
+
+<ng-template #produtoForm>
+  <app-produto-form [produto]="produto" [categorias]="categorias" (eventFechar)="fecharModal()" (eventReload)="obterPaginaProduto(this.pagina)"></app-produto-form>
+</ng-template>
+
+<swal
+  #deleteSwal
+  title="Realmente deseja excluir esse produto?"
+  text="Essa ação é irreversível"
+  icon="question"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  cancelButtonText="Cancelar"
+  cancelButtonColor="#2196F3"
+  confirmButtonText="Excluir"
+  confirmButtonColor="#dc3545"
+  >
+</swal>
+

@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-navbar">
+  <a [routerLink]="['/dashboard']" class="navbar-brand color-white col-lg-10"><img src="./assets/images/sana-variedades.png" alt="sana-variedades" height="32"></a>
+
+  <div class="btn-group col-lg-2 d-flex justify-content-end" dropdown>
+    <a href="javascript:void(0)" id="button-basic" dropdownToggle class="color-white dropdown-toggle" aria-controls="dropdown-basic">{{user?.nome}}<span class="caret"></span></a>
+    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu ml-user"
+        role="menu" aria-labelledby="button-basic">
+        <li (click)="exibirModalAlterarSenha(alterarSenhaForm)" role="menuitem"><a class="dropdown-item" href="javascript:void(0)">Alterar Senha</a></li>
+      <li (click)="sair()" role="menuitem"><a class="dropdown-item" href="javascript:void(0)">Sair</a></li>
+    </ul>
+  </div>
+</nav>
+
+<ng-template #alterarSenhaForm>
+  <app-trocar-senha-form (eventFechar)="fecharModal()"></app-trocar-senha-form>
+</ng-template>

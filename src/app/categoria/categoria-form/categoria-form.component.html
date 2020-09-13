@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{categoria?.id ? 'Atualizar' : 'Cadastrar'}} Categoria</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="fechar()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="categoriaForm" (submit)="salvar()">
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="nome">Nome<span class="text-danger">*</span></label>
+      <input formControlName="nome" type="text" id="nome" placeholder="Nome da categoria" [ngClass]="{'form-control': true, 'is-invalid': validarCampo('nome')}">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="fechar()" class="btn btn-outline-secondary" id="voltar" type="button">Voltar</button>
+    <button [disabled]="categoriaForm.invalid" class="btn btn-primary" id="cadastrar" type="submit"><span *ngIf="!processando; else spinner">{{categoria?.id ? 'Atualizar' : 'Cadastrar'}}</span></button>
+  </div>
+
+</form>
+
+
+<ng-template #spinner>
+  <app-spinner></app-spinner>
+</ng-template>

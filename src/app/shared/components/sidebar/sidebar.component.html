@@ -1,0 +1,10 @@
+<div class="d-flex" id="wrapper">
+  <div class="bg-sidebar border-right" id="sidebar-wrapper">
+    <div class="list-group list-group-flush">
+      <a [routerLink]="['/dashboard']" tooltip="Dashboard"  class="list-group-item list-group-item-action bg-sidebar"><span class="material-icons-outlined icon-size color-white">home</span></a>
+      <a [routerLink]="['/categoria']" tooltip="Categoria"  class="list-group-item list-group-item-action bg-sidebar"><span class="material-icons-outlined icon-size color-white">storefront</span></a>
+      <a [routerLink]="['/produto']" tooltip="Produtos"  class="list-group-item list-group-item-action bg-sidebar"><span class="material-icons-outlined icon-size color-white">receipt_long</span></a>
+      <a (click)="sair()" href="javascript:void(0)" tooltip="Sair"  class="list-group-item list-group-item-action bg-sidebar"><span class="material-icons-outlined icon-size color-white">exit_to_app</span></a>
+    </div>
+  </div>
+</div>

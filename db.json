@@ -1,0 +1,168 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "nome": "Pedro Silva",
+      "email": "pedrosilva@gmail.com",
+      "senha": "782711"
+    }
+  ],
+  "aderencias": [
+    {
+      "id": 1,
+      "mes": "Junho",
+      "ano": "2020",
+      "percentual": 49.3,
+      "meta": 50.1
+    },
+    {
+      "id": 2,
+      "mes": "Julho",
+      "ano": "2020",
+      "percentual": 51.7,
+      "meta": 49.8
+    },
+    {
+      "id": 3,
+      "mes": "Agosto",
+      "ano": "2020",
+      "percentual": 53.5,
+      "meta": 54.6
+    }
+  ],
+  "historico-vendas-bebidas": [
+    {
+      "id": 1,
+      "mes": "Junho",
+      "suco": 10.6,
+      "agua": 15.8,
+      "energetico": 30.8,
+      "cerveja": 42.8
+    },
+    {
+      "id": 2,
+      "mes": "Julho",
+      "suco": 10.8,
+      "agua": 16.5,
+      "energetico": 28.9,
+      "cerveja": 43.8
+    },
+    {
+      "id": 3,
+      "mes": "Agosto",
+      "suco": 10.4,
+      "agua": 14.5,
+      "energetico": 30.2,
+      "cerveja": 44.9
+    }
+  ],
+  "historico-vendas-ano": [
+    {
+      "id": 1,
+      "ano": 2019,
+      "vendas": [
+        {
+          "id": 1,
+          "mes": "Junho",
+          "produtividade": 48.6
+        },
+        {
+          "id": 2,
+          "mes": "Julho",
+          "produtividade": 52.3
+        },
+        {
+          "id": 1,
+          "mes": "Agosto",
+          "produtividade": 49.8
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "ano": 2020,
+      "vendas": [
+        {
+          "id": 1,
+          "mes": "Junho",
+          "produtividade": 43.6
+        },
+        {
+          "id": 2,
+          "mes": "Julho",
+          "produtividade": 50.3
+        },
+        {
+          "id": 3,
+          "mes": "Agosto",
+          "produtividade": 50.8
+        }
+      ]
+    }
+  ],
+  "historico": [
+    {
+      "id": 1,
+      "mes": "Junho",
+      "ano": "2020",
+      "suco": 215,
+      "agua": 296,
+      "energetico": 482,
+      "cerveja": 631
+    },
+    {
+      "id": 2,
+      "mes": "Julho",
+      "ano": "2020",
+      "suco": 234,
+      "agua": 331,
+      "energetico": 515,
+      "cerveja": 768
+    },
+    {
+      "id": 3,
+      "mes": "Agosto",
+      "ano": "2020",
+      "suco": 221,
+      "agua": 315,
+      "energetico": 499,
+      "cerveja": 746
+    }
+  ],
+  "categorias": [
+    {
+      "id": 2,
+      "nome": "Salgados"
+    },
+    {
+      "id": 3,
+      "nome": "Bebidas"
+    }
+  ],
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Refrigerante Lata",
+      "valor": 1.99,
+      "categoriaId": "3"
+    },
+    {
+      "id": 3,
+      "nome": "Pão de Queijo",
+      "valor": "1.49",
+      "categoriaId": 2
+    },
+    {
+      "id": 4,
+      "nome": "Pão Misto",
+      "valor": 1.97,
+      "categoriaId": "2"
+    },
+    {
+      "id": 5,
+      "nome": "Suco 300ml",
+      "valor": "2",
+      "categoriaId": "3"
+    }
+  ]
+}

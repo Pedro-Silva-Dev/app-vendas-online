@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 d-flex justify-content-center align-items-center cadastrar-height">
+      <div class="ui-card">
+        <div class="ui-card p-4">
+          <h3 class="h3 mb-4">Cadastrar Novo Usuário</h3>
+          <form [formGroup]="cadastrarForm" (submit)="cadastrar()">
+              <div class="form-group">
+                <label class="sr-only" for="nome">Nome</label>
+                <input formControlName="nome" type="text" [ngClass]="{'is-invalid': validarCampo('nome'), 'is-valid': campoCorreto('nome'), 'form-control': true}" id="nome" placeholder="Nome">
+                <small *ngIf="validarCampo('nome')" class="text-danger">Esse campo é obrigatório</small>
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="email">Email</label>
+                <input formControlName="email" type="text" [ngClass]="{'is-invalid': validarCampo('email'), 'is-valid': campoCorreto('email'), 'form-control': true}" id="email" placeholder="Email">
+                <small *ngIf="cadastrarForm.get('email').hasError('email')" class="text-danger">Email inválido<br></small>
+                <small *ngIf="cadastrarForm.get('email').hasError('emailCadastrado')" class="text-danger">Email já possui cadastro<br></small>
+                <small *ngIf="validarCampo('email')" class="text-danger">Esse campo é obrigatório</small>
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="senha">Senha</label>
+                <input formControlName="senha" type="password" autocomplete="false" [ngClass]="{'is-invalid': (validarCampo('senha') || !validarCampoSenha()), 'is-valid': (campoCorreto('senha') && !cadastrarForm.hasError('senha')), 'form-control': true}" id="senha" placeholder="Senha">
+                <small *ngIf="cadastrarForm.get('senha').hasError('minlenght')" class="text-danger">A senha deve ser maior que 6 characters<br></small>
+                <small *ngIf="!validarCampoSenha()" class="text-danger">As senhas devem ser iguais.<br></small>
+                <small *ngIf="validarCampo('senha')" class="text-danger">Esse campo é obrigatório</small>
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="reSenha">Repetir Senha</label>
+                <input formControlName="reSenha" type="password" autocomplete="false" [ngClass]="{'is-invalid': (validarCampo('reSenha') || !validarCampoSenha()), 'is-valid': (campoCorreto('reSenha') && !cadastrarForm.hasError('senha')), 'form-control': true}" id="reSenha" placeholder="Repetir senha">
+                <small *ngIf="cadastrarForm.get('reSenha').hasError('minlenght')" class="text-danger">A senha deve ser maior que 6 characters<br></small>
+                <small *ngIf="!validarCampoSenha()" class="text-danger">As senhas devem ser iguais.<br></small>
+                <small *ngIf="validarCampo('reSenha')" class="text-danger">Esse campo é obrigatório</small>
+              </div>
+              <div class="form-group d-flex justify-content-between">
+                  <a [routerLink]="['/']" class="d-flex align-items-center">Voltar</a>
+                  <button [disabled]="cadastrarForm.invalid || cadastrarForm.pending" type="submit" class="btn btn-primary"><span *ngIf="!processoDeCadastrar; else spinner">Cadastrar</span></button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #spinner>
+  <app-spinner></app-spinner>
+</ng-template>
